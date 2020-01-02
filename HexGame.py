@@ -7,8 +7,8 @@ pygame.init()
 game_dim = 7
 chess_size = (50, 50)
 clock = pygame.time.Clock()
+win = pygame.display.set_mode((1440, 920))
 
-board = (6 * [0], 7 * [0], 8 * [0], 9 * [0], 10 * [0], 11 * [0], 10 * [0], 9 * [0], 8 * [0], 7 * [0], 6 * [0])
 run = True
 
 chess_imgs = [
@@ -17,11 +17,11 @@ chess_imgs = [
     pygame.transform.scale(pygame.image.load(os.path.join('img', 'red.png')), chess_size)
 ]
 
-def draw_game():
-    win = pygame.display.set_mode((1280, 720))
-    win.fill((0, 0, 0))
-    hexboard.draw_board(win, 28, 128)
-    pygame.display.update()
+border_imgs = [
+    None,
+    pygame.transform.scale(pygame.image.load(os.path.join('img', 'blue-border.png')), chess_size),
+    pygame.transform.scale(pygame.image.load(os.path.join('img', 'red-border.png')), chess_size)
+]
 
 class ChessType(Enum):
     EMPTY = 0
@@ -29,8 +29,8 @@ class ChessType(Enum):
     TWO = 2
 
 class Chess:
-    y_offset = 10
-    x_offset = 10
+    y_offset = 5
+    x_offset = 5
     start_offset = 0
 
     def __init__(self, index, type = ChessType.EMPTY):
@@ -69,6 +69,8 @@ class Chess:
         y = y_space_offset + row * (Chess.y_offset + chess_size[1])
         x = x_space_offset + col * (Chess.x_offset + chess_size[0])
 
+        self.x = x
+        self.y = y
 
         Surface.blit(chess_imgs[self.type.value], (x, y))
 
@@ -81,8 +83,18 @@ class HexBoard:
         self.chess_list = []
 
 
+    def draw_boder(self, Surface):
+        for chess in self.chess_list:
+            row, col = chess.position()
+            if col == 0:
+                x = chess.x - (Chess.x_offset + chess_size[0])
+                y = chess.y
+                if row < game_dim - 1:
+                    Surface.blit(border_imgs[ChessType.ONE.value], (x, y))
+                if row > game_dim - 1:
+                    Surface.blit(border_imgs[ChessType.TWO.value], (x, y))
 
-    def draw_board(self, Surface, off_x, off_y):
+    def draw_board(self, Surface):
 
         num = game_dim ** 2
         for i in range(num):
@@ -93,20 +105,19 @@ class HexBoard:
         for i in range(num):
             self.chess_list[i].draw(Surface)
 
-
-def draw_hex(Surface, x, y, rgb):
-    pygame.draw.polygon(Surface, rgb, [(x - 28, y), (x - 12, y + 16), (x + 12, y + 16), (x + 28, y), (x + 12, y - 16),
-                                       (x - 12, y - 16)], 0)
-
-
-def draw_piece(Surface, x, y, rgb):
-    pygame.draw.circle(Surface, rgb, (x, y), 7)
+        self.draw_boder(Surface)
 
 
 hexboard = HexBoard()
 
+def draw_game():
+    win.fill((0, 0, 0))
+    hexboard.draw_board(win)
+    pygame.display.update()
+
+
 while run:
-    clock.tick(30)
+    clock.tick(1)
     draw_game()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
