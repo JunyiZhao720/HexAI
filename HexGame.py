@@ -4,7 +4,7 @@ from enum import Enum
 
 pygame.init()
 
-game_dim = 10
+game_dim = 6
 chess_size = (50, 50)
 clock = pygame.time.Clock()
 
@@ -17,7 +17,7 @@ chess_imgs = [
 ]
 
 def draw_game():
-    win = pygame.display.set_mode((1920, 1080))
+    win = pygame.display.set_mode((1280, 720))
     win.fill((0, 0, 0))
     hexboard.draw_board(win, 28, 128)
     pygame.display.update()
@@ -51,36 +51,21 @@ class Chess:
             else:
                 offset -= 1
 
-        return row, remaining
+        return row, remaining           # row, col
 
     def draw(self, Surface):
         row, col = self.position()
-        print(row, col)
-        y = row * (Chess.y_offset + chess_size[1])
-        x = col * (Chess.x_offset + chess_size[0])
-        # if row % 2 == 0:  # starts from 0
-        #     row_even_lines = row
-        #     left_offset = game_dim // 2 - row
 
-        # # Set up x
-        # if y%2 == 0:                        # start from middle
-        #     mid_col = col_num // 2
-        #     if x > mid_col:                     # right side
-        #         x = (mid_width + chess_size[0] // 2 + Chess.x_offset) + (x - mid_col) * (chess_size[0] + Chess.x_offset)
-        #     elif x < mid_col:                 # left
-        #         x = (mid_width - chess_size[0] // 2 - Chess.x_offset) - (mid_col - x) * (chess_size[0] + Chess.x_offset)
-        #     else:                           # mid
-        #         x = mid_width - chess_size[0] // 2
-        #
-        # else:                               # start from besides
-        #     mid_col = col_num // 2
-        #     if x >= mid_col:                 # right side
-        #         x = mid_width + (x - mid_col) * (chess_size[0] + Chess.x_offset)
-        #     else:   # left side
-        #         x = mid_width - (x - mid_col) * (chess_size[0] + Chess.x_offset)
-        #
-        # # Set Up y
-        #     y = y * (chess_size[1] + Chess.y_offset)
+        x_space_offset = (game_dim // 2) * (Chess.x_offset + chess_size[0]) + (chess_size[0] + Chess.x_offset) // 2
+        if row <= game_dim - 2:
+            x_space_offset -= row * ((chess_size[0] + Chess.x_offset) // 2)
+        else:
+            x_space_offset += (row - game_dim - 2) * ((chess_size[0] + Chess.x_offset) // 2)
+
+        x_space_offset += Surface.get_width() // 3
+        y_space_offset = Chess.y_offset + chess_size[1]
+        y = y_space_offset + row * (Chess.y_offset + chess_size[1])
+        x = x_space_offset + col * (Chess.x_offset + chess_size[0])
 
 
         Surface.blit(chess_imgs[self.type.value], (x, y))
@@ -97,7 +82,7 @@ class HexBoard:
 
     def draw_board(self, Surface, off_x, off_y):
 
-        num = 81
+        num = 25
         for i in range(num):
             self.chess_list.append(Chess(i))
         for i in range(num):
