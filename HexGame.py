@@ -1,6 +1,8 @@
 import pygame
+import pygame.gfxdraw
 import os
 from enum import Enum
+import math
 
 pygame.init()
 
@@ -30,7 +32,7 @@ class ChessType(Enum):
 
 class Chess:
     y_offset = 5
-    x_offset = 5
+    x_offset = 10
     start_offset = 0
 
     def __init__(self, index, type = ChessType.EMPTY):
@@ -54,6 +56,16 @@ class Chess:
 
         return row, remaining           # row, col
 
+    def polygon(self):
+        a = (int(self.x + chess_size[0]/2), self.y)
+        b = (self.x + chess_size[0], int(self.y + math.sqrt(3)/6 * chess_size[0]))
+        c = (self.x + chess_size[0], int(self.y + math.sqrt(3)/2 * chess_size[0]))
+        d = (int(self.x + chess_size[0]/2), int(self.y + 2 * math.sqrt(3)/3 * chess_size[0]))
+        e = (self.x, int(self.y + math.sqrt(3)/2 * chess_size[0]))
+        f = (self.x, int(self.y + math.sqrt(3)/6 * chess_size[0]))
+
+        return [a, b, c, d, e, f]
+
     def draw(self, Surface):
         row, col = self.position()
         total_lines = 2 * game_dim - 1
@@ -72,8 +84,14 @@ class Chess:
         self.x = x
         self.y = y
 
-        Surface.blit(chess_imgs[self.type.value], (x, y))
-
+        # Surface.blit(chess_imgs[self.type.value], (x, y))
+        # pygame.draw.polygon(Surface, (0, 0, 0), self.polygon(), 5)
+        if self.type == ChessType.EMPTY:
+            pygame.gfxdraw.aapolygon(Surface, self.polygon(), (0, 0, 0))
+        elif self.type == ChessType.ONE:
+            pygame.gfxdraw.filled_polygon(Surface, self.polygon(), (0, 0, 64))
+        else:
+            pygame.gfxdraw.filled_polygon(Surface, self.polygon(), (64, 0, 0))
 class HexBoard:
 
     def __init__(self, red=255, green=248, blue=220):
@@ -111,7 +129,7 @@ class HexBoard:
 hexboard = HexBoard()
 
 def draw_game():
-    win.fill((0, 0, 0))
+    win.fill((128, 128, 128))
     hexboard.draw_board(win)
     pygame.display.update()
 

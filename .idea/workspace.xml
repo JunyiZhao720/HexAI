@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/HexGame.py" line="49" />
+    <bookmark url="file://$PROJECT_DIR$/HexGame.py" line="51" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b7543dec-78ad-4a22-a97e-a12a901409bf" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Algorithm.doc" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm.doc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/HexGame.py" beforeDir="false" afterPath="$PROJECT_DIR$/HexGame.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/blue.png" beforeDir="false" afterPath="$PROJECT_DIR$/img/blue.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/red.png" beforeDir="false" afterPath="$PROJECT_DIR$/img/red.png" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,7 +16,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/HexAI$HexGame.coverage" NAME="HexGame Coverage Results" MODIFIED="1577974795624" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/HexAI$HexGame.coverage" NAME="HexGame Coverage Results" MODIFIED="1577977854921" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FUSProjectUsageTrigger">
     <session id="-573872213">
@@ -41,12 +40,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="2840" />
+          <entry key="py" value="3316" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="2840" />
+          <entry key="Python" value="3316" />
         </counts>
       </usages-collector>
     </session>
@@ -65,10 +64,12 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/HexGame.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="9" column="40" selection-start-line="9" selection-start-column="40" selection-end-line="9" selection-end-column="40" />
+            <state relative-caret-position="205">
+              <caret line="131" column="27" selection-start-line="131" selection-start-column="27" selection-end-line="131" selection-end-column="27" />
               <folding>
-                <marker date="1577974793670" expanded="true" signature="2318:2746" ph="..." />
+                <element signature="e#0#13#0" expanded="true" />
+                <marker date="1577977853469" expanded="true" signature="1392:1879" ph="..." />
+                <marker date="1577977853469" expanded="true" signature="3255:3683" ph="..." />
               </folding>
             </state>
           </provider>
@@ -270,10 +271,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/HexGame.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="9" column="40" selection-start-line="9" selection-start-column="40" selection-end-line="9" selection-end-column="40" />
+        <state relative-caret-position="205">
+          <caret line="131" column="27" selection-start-line="131" selection-start-column="27" selection-end-line="131" selection-end-column="27" />
           <folding>
-            <marker date="1577974793670" expanded="true" signature="2318:2746" ph="..." />
+            <element signature="e#0#13#0" expanded="true" />
+            <marker date="1577977853469" expanded="true" signature="1392:1879" ph="..." />
+            <marker date="1577977853469" expanded="true" signature="3255:3683" ph="..." />
           </folding>
         </state>
       </provider>
