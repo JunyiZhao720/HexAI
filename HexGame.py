@@ -75,7 +75,7 @@ class Chess:
 
         return [p, r]  # original point, radius
 
-    def isWithInCircle(self, x, y):
+    def isWithInCollisionCircle(self, x, y):
         circle = self.circle()
         d = math.sqrt((circle[0][0] - x)**2 + (circle[0][1] - y)**2)
         return d <= circle[1]
@@ -148,12 +148,25 @@ class HexBoard:
                 if row > game_dim - 1:
                     Surface.blit(border_imgs[ChessType.TWO.value], (x, y))
 
-    def detect_collision(self, x, y):
-
+    def detect_mouse_hit(self, x, y):
         for chess in self.chess_list:
-            if chess.isWithInCircle(x, y):
+            if chess.isWithInCollisionCircle(x, y):
                 chess.hit(ChessType.ONE)
 
+    def list_to_rc(self):
+        r_c = []
+        for i in range(2 * game_dim - 1):
+            r_c.append([])
+        for chess in self.chess_list:
+            row = chess.position()[0]
+            r_c[row].append(chess.type)
+
+    def rc_to_list(self, rc):
+        count = 0
+        for row in rc:
+            for type in row:
+                self.chess_list[count] = type
+                count += 1
 
 hexboard = HexBoard()
 
@@ -163,15 +176,14 @@ def draw_game():
     pygame.display.update()
 
 while run:
-    clock.tick(10)
+    clock.tick(1)
     draw_game()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
         elif event.type == pygame.MOUSEBUTTONDOWN:
             x, y = pygame.mouse.get_pos()
-            hexboard.detect_collision(x, y)
+            hexboard.detect_mouse_hit(x, y)
             print(x, y)
-
 
 pygame.quit()
