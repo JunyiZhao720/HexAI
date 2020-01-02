@@ -12,8 +12,9 @@ board = (6 * [0], 7 * [0], 8 * [0], 9 * [0], 10 * [0], 11 * [0], 10 * [0], 9 * [
 run = True
 
 chess_imgs = [
-    pygame.transform.scale(pygame.image.load(os.path.join('img', 'empty2.png')), chess_size)
-
+    pygame.transform.scale(pygame.image.load(os.path.join('img', 'empty.png')), chess_size),
+    pygame.transform.scale(pygame.image.load(os.path.join('img', 'blue.png')), chess_size),
+    pygame.transform.scale(pygame.image.load(os.path.join('img', 'red.png')), chess_size)
 ]
 
 def draw_game():
@@ -86,6 +87,9 @@ class HexBoard:
         num = game_dim ** 2
         for i in range(num):
             self.chess_list.append(Chess(i))
+        self.chess_list[3].type = ChessType.ONE
+        self.chess_list[8].type = ChessType.TWO
+
         for i in range(num):
             self.chess_list[i].draw(Surface)
 
