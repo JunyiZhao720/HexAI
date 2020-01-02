@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/HexGame.py" line="51" />
+    <bookmark url="file://$PROJECT_DIR$/HexGame.py" line="54" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b7543dec-78ad-4a22-a97e-a12a901409bf" name="Default Changelist" comment="">
@@ -16,7 +16,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/HexAI$HexGame.coverage" NAME="HexGame Coverage Results" MODIFIED="1577977854921" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/HexAI$HexGame.coverage" NAME="HexGame Coverage Results" MODIFIED="1577991722255" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FUSProjectUsageTrigger">
     <session id="-573872213">
@@ -40,12 +40,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="3316" />
+          <entry key="py" value="4074" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="3316" />
+          <entry key="Python" value="4074" />
         </counts>
       </usages-collector>
     </session>
@@ -64,12 +64,12 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/HexGame.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="205">
-              <caret line="131" column="27" selection-start-line="131" selection-start-column="27" selection-end-line="131" selection-end-column="27" />
+            <state relative-caret-position="243">
+              <caret line="165" column="17" selection-start-line="165" selection-start-column="17" selection-end-line="165" selection-end-column="17" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
-                <marker date="1577977853469" expanded="true" signature="1392:1879" ph="..." />
-                <marker date="1577977853469" expanded="true" signature="3255:3683" ph="..." />
+                <marker date="1577991719541" expanded="true" signature="2236:2373" ph="..." />
+                <marker date="1577991719541" expanded="true" signature="3977:3982" ph="..." />
               </folding>
             </state>
           </provider>
@@ -125,10 +125,11 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds">
     <option name="x" value="952" />
-    <option name="width" value="977" />
-    <option name="height" value="1038" />
+    <option name="y" value="-8" />
+    <option name="width" value="976" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -154,6 +155,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -210,14 +212,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="952" y="-8" width="976" height="1056" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.069296375" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1419214" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32899022" />
       <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.33116177" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.5092291" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
@@ -271,12 +273,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/HexGame.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="131" column="27" selection-start-line="131" selection-start-column="27" selection-end-line="131" selection-end-column="27" />
+        <state relative-caret-position="243">
+          <caret line="165" column="17" selection-start-line="165" selection-start-column="17" selection-end-line="165" selection-end-column="17" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
-            <marker date="1577977853469" expanded="true" signature="1392:1879" ph="..." />
-            <marker date="1577977853469" expanded="true" signature="3255:3683" ph="..." />
+            <marker date="1577991719541" expanded="true" signature="2236:2373" ph="..." />
+            <marker date="1577991719541" expanded="true" signature="3977:3982" ph="..." />
           </folding>
         </state>
       </provider>

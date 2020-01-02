@@ -3,6 +3,8 @@ import pygame.gfxdraw
 import os
 from enum import Enum
 import math
+# from shapely.geometry import Point
+# from shapely.geometry.polygon import Polygon
 
 pygame.init()
 
@@ -40,6 +42,7 @@ class Chess:
         self.type = type
         self.x = 0
         self.y = 0
+        self.changed = True
 
     def position(self):
         remaining = self.index
@@ -66,7 +69,20 @@ class Chess:
 
         return [a, b, c, d, e, f]
 
+    def circle(self):
+        p = (int(0.5 * chess_size[0] + self.x), int(math.sqrt(3)/3 * chess_size[0] + self.y))
+        r = int(math.sqrt(3)/3 * chess_size[0])
+
+        return [p, r]  # original point, radius
+
+    def isWithInCircle(self, x, y):
+        circle = self.circle()
+        d = math.sqrt((circle[0][0] - x)**2 + (circle[0][1] - y)**2)
+        return d <= circle[1]
+
+
     def draw(self, Surface):
+
         row, col = self.position()
         total_lines = 2 * game_dim - 1
 
@@ -92,6 +108,16 @@ class Chess:
             pygame.gfxdraw.filled_polygon(Surface, self.polygon(), (0, 0, 64))
         else:
             pygame.gfxdraw.filled_polygon(Surface, self.polygon(), (64, 0, 0))
+
+
+        # collision circle
+        cir = self.circle()
+        pygame.draw.circle(Surface, (255, 0, 0), cir[0], cir[1], 1)
+
+
+    def hit(self, type):
+        self.type = type
+
 class HexBoard:
 
     def __init__(self, red=255, green=248, blue=220):
@@ -100,8 +126,18 @@ class HexBoard:
         self.b = blue
         self.chess_list = []
 
+        for i in range(game_dim ** 2):
+            self.chess_list.append(Chess(i))
 
-    def draw_boder(self, Surface):
+    def draw_board(self, Surface):
+
+        self.chess_list[3].type = ChessType.ONE
+        self.chess_list[8].type = ChessType.TWO
+
+        for i in range(game_dim ** 2):
+            self.chess_list[i].draw(Surface)
+
+        # border
         for chess in self.chess_list:
             row, col = chess.position()
             if col == 0:
@@ -112,34 +148,30 @@ class HexBoard:
                 if row > game_dim - 1:
                     Surface.blit(border_imgs[ChessType.TWO.value], (x, y))
 
-    def draw_board(self, Surface):
+    def detect_collision(self, x, y):
 
-        num = game_dim ** 2
-        for i in range(num):
-            self.chess_list.append(Chess(i))
-        self.chess_list[3].type = ChessType.ONE
-        self.chess_list[8].type = ChessType.TWO
-
-        for i in range(num):
-            self.chess_list[i].draw(Surface)
-
-        self.draw_boder(Surface)
+        for chess in self.chess_list:
+            if chess.isWithInCircle(x, y):
+                chess.hit(ChessType.ONE)
 
 
 hexboard = HexBoard()
 
 def draw_game():
-    win.fill((128, 128, 128))
+    win.fill((200, 200, 200))
     hexboard.draw_board(win)
     pygame.display.update()
 
-
 while run:
-    clock.tick(1)
+    clock.tick(10)
     draw_game()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            x, y = pygame.mouse.get_pos()
+            hexboard.detect_collision(x, y)
+            print(x, y)
 
-    keys = pygame.key.get_pressed()
+
 pygame.quit()
