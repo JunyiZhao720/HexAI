@@ -4,7 +4,7 @@ from enum import Enum
 
 pygame.init()
 
-game_dim = 6
+game_dim = 7
 chess_size = (50, 50)
 clock = pygame.time.Clock()
 
@@ -12,7 +12,7 @@ board = (6 * [0], 7 * [0], 8 * [0], 9 * [0], 10 * [0], 11 * [0], 10 * [0], 9 * [
 run = True
 
 chess_imgs = [
-    pygame.transform.scale(pygame.image.load(os.path.join('img', 'blue.png')), chess_size)
+    pygame.transform.scale(pygame.image.load(os.path.join('img', 'empty2.png')), chess_size)
 
 ]
 
@@ -46,7 +46,7 @@ class Chess:
         while(remaining >= offset and offset >= 0):
             remaining -= offset
             row += 1
-            if row <= game_dim - 2:
+            if row <= game_dim - 1:
                 offset += 1
             else:
                 offset -= 1
@@ -55,12 +55,13 @@ class Chess:
 
     def draw(self, Surface):
         row, col = self.position()
+        total_lines = 2 * game_dim - 1
 
         x_space_offset = (game_dim // 2) * (Chess.x_offset + chess_size[0]) + (chess_size[0] + Chess.x_offset) // 2
-        if row <= game_dim - 2:
+        if row <= game_dim - 1:
             x_space_offset -= row * ((chess_size[0] + Chess.x_offset) // 2)
         else:
-            x_space_offset += (row - game_dim - 2) * ((chess_size[0] + Chess.x_offset) // 2)
+            x_space_offset -= (total_lines - row - 1) * ((chess_size[0] + Chess.x_offset) // 2)
 
         x_space_offset += Surface.get_width() // 3
         y_space_offset = Chess.y_offset + chess_size[1]
@@ -82,7 +83,7 @@ class HexBoard:
 
     def draw_board(self, Surface, off_x, off_y):
 
-        num = 25
+        num = game_dim ** 2
         for i in range(num):
             self.chess_list.append(Chess(i))
         for i in range(num):
@@ -101,7 +102,7 @@ def draw_piece(Surface, x, y, rgb):
 hexboard = HexBoard()
 
 while run:
-    clock.tick(10)
+    clock.tick(30)
     draw_game()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
