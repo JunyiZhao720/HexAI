@@ -98,13 +98,13 @@ class Chess:
         if self.type == ChessType.EMPTY:
             pygame.gfxdraw.aapolygon(Surface, self.polygon(), (0, 0, 0))
         elif self.type == ChessType.ONE:
-            pygame.gfxdraw.filled_polygon(Surface, self.polygon(), (0, 0, 64))
+            pygame.gfxdraw.filled_polygon(Surface, self.polygon(), (0, 0, 128))
         else:
-            pygame.gfxdraw.filled_polygon(Surface, self.polygon(), (64, 0, 0))
+            pygame.gfxdraw.filled_polygon(Surface, self.polygon(), (128, 0, 0))
 
 
         # collision circle
-        cir = self.circle()
+        # cir = self.circle()
         # pygame.draw.circle(Surface, (255, 0, 0), cir[0], cir[1], 1)
 
 
@@ -117,6 +117,7 @@ class HexBoard:
         self.game_dim = game_dim
         self.chess_matrix = []
         self.changed = True
+        self.current_player = ChessType.ONE
         for i in range(self.game_dim + 2):
             self.chess_matrix.append([])
             for j in range(self.game_dim + 2):
@@ -137,23 +138,33 @@ class HexBoard:
 
                 # check if it is border
                 if (row == 0 and col == 0) or (row == 0 and col == self.game_dim + 1) or (row == self.game_dim + 1 and col == 0) or (row == self.game_dim + 1 and row == col):
-                    self.chess_matrix[row][col].draw_circle(Surface, 64, 0 ,64, x, y)
+                    self.chess_matrix[row][col].draw_circle(Surface, 128, 0 ,128, x, y)
                 elif row == 0 or row == self.game_dim + 1:
-                    self.chess_matrix[row][col].draw_circle(Surface, 0, 0, 64, x, y)
+                    self.chess_matrix[row][col].draw_circle(Surface, 0, 0, 128, x, y)
                 elif col == 0 or col == self.game_dim + 1:
-                    self.chess_matrix[row][col].draw_circle(Surface, 64, 0, 0, x, y)
+                    self.chess_matrix[row][col].draw_circle(Surface, 128, 0, 0, x, y)
                 else:
                     self.chess_matrix[row][col].draw(Surface, x, y)
 
+    def flip(self):
+        if self.current_player == ChessType.ONE:
+            self.current_player = ChessType.TWO
+        else:
+            self.current_player = ChessType.ONE
+        self.changed = True
 
-    def change(self, chess):
-        chess.hit(ChessType.ONE)
+    def update_chess(self, row, col):
+        self.chess_matrix[row][col].hit(self.current_player)
+        self.flip()
         self.changed = True
 
     def detect_mouse_hit(self, x, y):
-        for chess in self.chess_matrix:
-            if chess.isWithInCollisionCircle(x, y):
-                self.change(chess)
+        for row in range(1, self.game_dim + 1):
+            for col in range(1, self.game_dim + 1):
+                if self.chess_matrix[row][col].type != ChessType.EMPTY:
+                    continue
+                if self.chess_matrix[row][col].isWithInCollisionCircle(x, y):
+                    self.update_chess(row, col)
 
     # def list_to_matrix(self):
     #     matrix = []
@@ -211,14 +222,14 @@ def draw_game():
     pygame.display.update()
 
 while run:
-    clock.tick(1)
+    clock.tick(10)
     draw_game()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
         elif event.type == pygame.MOUSEBUTTONDOWN:
             x, y = pygame.mouse.get_pos()
-            # hexboard.detect_mouse_hit(x, y)
+            hexboard.detect_mouse_hit(x, y)
             print(x, y)
     # hexboard.update()
 pygame.quit()
