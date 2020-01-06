@@ -29,8 +29,8 @@ border_imgs = [
 
 class ChessType(Enum):
     EMPTY = 0
-    ONE = 1
-    TWO = 2
+    HUMAN = 1
+    AI = 2
 
 class Chess:
     y_offset = 10
@@ -97,7 +97,7 @@ class Chess:
         # pygame.draw.polygon(Surface, (0, 0, 0), self.polygon(), 5)
         if self.type == ChessType.EMPTY:
             pygame.gfxdraw.aapolygon(Surface, self.polygon(), (0, 0, 0))
-        elif self.type == ChessType.ONE:
+        elif self.type == ChessType.HUMAN:
             pygame.gfxdraw.filled_polygon(Surface, self.polygon(), (0, 0, 128))
         else:
             pygame.gfxdraw.filled_polygon(Surface, self.polygon(), (128, 0, 0))
@@ -117,7 +117,7 @@ class HexBoard:
         self.game_dim = game_dim
         self.chess_matrix = []
         self.changed = True
-        self.current_player = ChessType.ONE
+        self.current_player = ChessType.HUMAN
         for i in range(self.game_dim + 2):
             self.chess_matrix.append([])
             for j in range(self.game_dim + 2):
@@ -147,10 +147,10 @@ class HexBoard:
                     self.chess_matrix[row][col].draw(Surface, x, y)
 
     def flip(self):
-        if self.current_player == ChessType.ONE:
-            self.current_player = ChessType.TWO
+        if self.current_player == ChessType.HUMAN:
+            self.current_player = ChessType.AI
         else:
-            self.current_player = ChessType.ONE
+            self.current_player = ChessType.HUMAN
         self.changed = True
 
     def update_chess(self, row, col):
@@ -166,52 +166,30 @@ class HexBoard:
                 if self.chess_matrix[row][col].isWithInCollisionCircle(x, y):
                     self.update_chess(row, col)
 
-    # def list_to_matrix(self):
-    #     matrix = []
-    #     for i in range(game_dim):
-    #         matrix.append([])
-    #
-    #     # first row
-    #     matrix[0].append(0)
-    #     for offset in range(1, game_dim):
-    #         matrix[0].append(matrix[0][offset-1] + offset)
-    #
-    #     # generate dimension list
-    #     dimension_list = []
-    #     for i in range(1, game_dim + 1):
-    #         dimension_list.append(i)
-    #     for i in range(game_dim, 0, -1):
-    #         dimension_list.append(i)
-    #
-    #     print(dimension_list)
-    #     # set remaining elements
-    #
-    #
-    # def matrix_to_list(self, matrix):
-    #     # matrix to r_c
-    #     r_c = []
-    #     for i in range(2 * game_dim - 1):
-    #         r_c.append([])
-    #
-    #     for row in range(game_dim):
-    #         for col in range(game_dim):
-    #             r_c[col]
+    def toMatrix(self):
+        matrix = []
+        for row in range(self.game_dim):
+            matrix.append([])
 
-        # r_c to index
-        # count = 0
-        # for row in rc:
-        #     for type in row:
-        #         self.chess_matrix[count] = type
-        #         count += 1
+        for row in range(1, self.game_dim + 1):
+            for col in range(1, self.game_dim + 1):
+                matrix[row].append(self.chess_matrix[row][col].type)
 
-    # def update(self): # used to update the algorithm class
-    #     if not self.changed:
-    #         return
-    #
-    #     # self.algorithm.update()
-    #     print(self.list_to_matrix())
-    #
-    #     self.changed = False
+        return matrix
+
+
+    def update(self): # used to update the broad
+        if not self.changed:
+            return
+
+        # if self.current_player == ChessType.AI:
+        #     pass  # todo: send to algorithm
+        # elif:
+        #     pass # todo: receive from algorithm
+        # matrix = self.toMatrix()
+
+
+        self.changed = False
 
 
 hexboard = HexBoard(dim)
