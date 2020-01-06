@@ -120,11 +120,14 @@ class HexBoard:
     def draw_board(self, Surface):
 
         for row in range(self.game_dim):
-            row_offset = row * (chess_size[0] + Chess.x_offset)
-            col_offset = row * (chess_size[1] + Chess.y_offset)
+            col_offset = row * (chess_size[0] + Chess.x_offset)
+            row_offset = row * (chess_size[1] + Chess.y_offset)
             for col in range(self.game_dim):
-                x = row_offset
-                y = col_offset + col * (chess_size[1] + Chess.y_offset)
+                x_space_offset = Surface.get_width() // 2
+                # x_space_offset -= row * (chess_size[0] + Chess.x_offset) // 2
+
+                x = col_offset + x_space_offset
+                y = row_offset + col * (chess_size[1] + Chess.y_offset)
                 self.chess_matrix[row][col].draw(Surface, x, y)
 
 
