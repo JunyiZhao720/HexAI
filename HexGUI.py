@@ -33,7 +33,7 @@ class ChessType(Enum):
     TWO = 2
 
 class Chess:
-    y_offset = 5
+    y_offset = 10
     x_offset = 10
 
     def __init__(self, row, col, type = ChessType.EMPTY):
@@ -99,7 +99,7 @@ class Chess:
 
         # collision circle
         cir = self.circle()
-        pygame.draw.circle(Surface, (255, 0, 0), cir[0], cir[1], 1)
+        # pygame.draw.circle(Surface, (255, 0, 0), cir[0], cir[1], 1)
 
 
     def hit(self, type):
@@ -124,7 +124,7 @@ class HexBoard:
             row_offset = row * (chess_size[1] + Chess.y_offset)
             for col in range(self.game_dim):
                 x_space_offset = Surface.get_width() // 2
-                # x_space_offset -= row * (chess_size[0] + Chess.x_offset) // 2
+                x_space_offset -= (row + col) * (chess_size[0] + Chess.x_offset) // 2
 
                 x = col_offset + x_space_offset
                 y = row_offset + col * (chess_size[1] + Chess.y_offset)
