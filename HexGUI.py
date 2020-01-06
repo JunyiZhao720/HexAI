@@ -9,7 +9,7 @@ import math
 pygame.init()
 
 dim = 7
-chess_size = (50, 50)
+chess_size = (25, 25)
 clock = pygame.time.Clock()
 win = pygame.display.set_mode((1440, 920))
 
@@ -66,7 +66,13 @@ class Chess:
         d = math.sqrt((circle[0][0] - x)**2 + (circle[0][1] - y)**2)
         return d <= circle[1]
 
-
+    def draw_circle(self, Surface, r, g, b, x, y):
+        self.x = x
+        self.y = y
+        cir = self.circle()
+        # pygame.draw.circle(Surface, (r, g, b), cir[0], cir[1], 1)
+        # pygame.gfxdraw.circle(Surface, cir[0][0], cir[0][1], cir[1], (r, g, b))
+        pygame.gfxdraw.filled_circle(Surface, cir[0][0], cir[0][1], cir[1], (r, g, b))
     def draw(self, Surface, x, y):
 
         # row = self.row
@@ -111,36 +117,34 @@ class HexBoard:
         self.game_dim = game_dim
         self.chess_matrix = []
         self.changed = True
-        for i in range(self.game_dim):
+        for i in range(self.game_dim + 2):
             self.chess_matrix.append([])
-            for j in range(self.game_dim):
+            for j in range(self.game_dim + 2):
                 self.chess_matrix[i].append(Chess(i, j))
 
 
     def draw_board(self, Surface):
 
-        for row in range(self.game_dim):
+        for row in range(self.game_dim + 2):
             col_offset = row * (chess_size[0] + Chess.x_offset)
             row_offset = row * (chess_size[1] + Chess.y_offset)
-            for col in range(self.game_dim):
+            for col in range(self.game_dim + 2):
                 x_space_offset = Surface.get_width() // 2
                 x_space_offset -= (row + col) * (chess_size[0] + Chess.x_offset) // 2
 
                 x = col_offset + x_space_offset
                 y = row_offset + col * (chess_size[1] + Chess.y_offset)
-                self.chess_matrix[row][col].draw(Surface, x, y)
 
+                # check if it is border
+                if (row == 0 and col == 0) or (row == 0 and col == self.game_dim + 1) or (row == self.game_dim + 1 and col == 0) or (row == self.game_dim + 1 and row == col):
+                    self.chess_matrix[row][col].draw_circle(Surface, 64, 0 ,64, x, y)
+                elif row == 0 or row == self.game_dim + 1:
+                    self.chess_matrix[row][col].draw_circle(Surface, 0, 0, 64, x, y)
+                elif col == 0 or col == self.game_dim + 1:
+                    self.chess_matrix[row][col].draw_circle(Surface, 64, 0, 0, x, y)
+                else:
+                    self.chess_matrix[row][col].draw(Surface, x, y)
 
-        # border
-        # for chess in self.chess_matrix:
-        #     row, col = chess.position()
-        #     if col == 0:
-        #         x = chess.x - (Chess.x_offset + chess_size[0])
-        #         y = chess.y
-        #         if row < game_dim - 1:
-        #             Surface.blit(border_imgs[ChessType.ONE.value], (x, y))
-        #         if row > game_dim - 1:
-        #             Surface.blit(border_imgs[ChessType.TWO.value], (x, y))
 
     def change(self, chess):
         chess.hit(ChessType.ONE)

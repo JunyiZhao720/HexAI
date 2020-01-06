@@ -13,7 +13,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/HexAI$HexGUI.coverage" NAME="HexGUI Coverage Results" MODIFIED="1578340625150" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/HexAI$HexGUI.coverage" NAME="HexGUI Coverage Results" MODIFIED="1578342305146" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/HexAI$HexGame.coverage" NAME="HexGame Coverage Results" MODIFIED="1578087533112" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="FUSProjectUsageTrigger">
@@ -39,13 +39,13 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="9" />
-          <entry key="py" value="5821" />
+          <entry key="py" value="6369" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="9" />
-          <entry key="Python" value="5821" />
+          <entry key="Python" value="6369" />
         </counts>
       </usages-collector>
     </session>
@@ -69,11 +69,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/HexGUI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="38">
-              <caret line="126" column="46" selection-start-line="126" selection-start-column="46" selection-end-line="126" selection-end-column="46" />
+            <state relative-caret-position="209">
+              <caret line="146" lean-forward="true" selection-start-line="146" selection-end-line="146" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
-                <marker date="1578340619649" expanded="true" signature="3794:4349" ph="..." />
+                <marker date="1578342354357" expanded="true" signature="2369:2374" ph="..." />
               </folding>
             </state>
           </provider>
@@ -328,11 +328,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/HexGUI.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="126" column="46" selection-start-line="126" selection-start-column="46" selection-end-line="126" selection-end-column="46" />
+        <state relative-caret-position="209">
+          <caret line="146" lean-forward="true" selection-start-line="146" selection-end-line="146" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
-            <marker date="1578340619649" expanded="true" signature="3794:4349" ph="..." />
+            <marker date="1578342354357" expanded="true" signature="2369:2374" ph="..." />
           </folding>
         </state>
       </provider>
