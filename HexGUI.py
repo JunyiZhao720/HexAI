@@ -9,6 +9,7 @@ import math
 pygame.init()
 
 dim = 7
+frame = 10
 chess_size = (25, 25)
 clock = pygame.time.Clock()
 win = pygame.display.set_mode((1440, 920))
@@ -116,8 +117,9 @@ class HexBoard:
     def __init__(self, game_dim):
         self.game_dim = game_dim
         self.chess_matrix = []
-        self.changed = True
+        self.changed = False
         self.current_player = ChessType.HUMAN
+        self.current_move = ()
         for i in range(self.game_dim + 2):
             self.chess_matrix.append([])
             for j in range(self.game_dim + 2):
@@ -155,7 +157,6 @@ class HexBoard:
 
     def update_chess(self, row, col):
         self.chess_matrix[row][col].hit(self.current_player)
-        self.flip()
         self.changed = True
 
     def detect_mouse_hit(self, x, y):
@@ -164,7 +165,8 @@ class HexBoard:
                 if self.chess_matrix[row][col].type != ChessType.EMPTY:
                     continue
                 if self.chess_matrix[row][col].isWithInCollisionCircle(x, y):
-                    self.update_chess(row, col)
+                    self.current_move = (row, col)
+                    self.changed = True
 
     def toMatrix(self):
         matrix = []
@@ -173,21 +175,35 @@ class HexBoard:
 
         for row in range(1, self.game_dim + 1):
             for col in range(1, self.game_dim + 1):
-                matrix[row].append(self.chess_matrix[row][col].type)
+                matrix[row - 1].append(self.chess_matrix[row][col].type)
 
         return matrix
 
+    def winningCheck(self):
+        matrix = self.toMatrix()
+        result = False  # Call Winning Check algorithm here
+        return result
 
     def update(self): # used to update the broad
         if not self.changed:
             return
 
-        # if self.current_player == ChessType.AI:
-        #     pass  # todo: send to algorithm
+        if self.current_player == ChessType.HUMAN:
+            self.update_chess(self.current_move[0], self.current_move[1])
+            pass  # todo: send to AI
+
+        if self.current_player == ChessType.AI:
+            self.update_chess(self.current_move[0], self.current_move[1])
         # elif:
         #     pass # todo: receive from algorithm
         # matrix = self.toMatrix()
 
+        if self.winningCheck():
+            global frame
+            print("Player:", self.current_player.name, "Won!!")
+            frame = 0
+        self.update_chess(self.current_move[0], self.current_move[1])
+        self.flip()
 
         self.changed = False
 
@@ -200,7 +216,7 @@ def draw_game():
     pygame.display.update()
 
 while run:
-    clock.tick(10)
+    clock.tick(frame)
     draw_game()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -209,5 +225,5 @@ while run:
             x, y = pygame.mouse.get_pos()
             hexboard.detect_mouse_hit(x, y)
             print(x, y)
-    # hexboard.update()
+    hexboard.update()
 pygame.quit()
