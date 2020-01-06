@@ -162,6 +162,9 @@ class HexBoard:
     def detect_mouse_hit(self, x, y):
         for row in range(1, self.game_dim + 1):
             for col in range(1, self.game_dim + 1):
+                # todo: only check human move
+                # if self.current_player != ChessType.HUMAN:
+                #     continue
                 if self.chess_matrix[row][col].type != ChessType.EMPTY:
                     continue
                 if self.chess_matrix[row][col].isWithInCollisionCircle(x, y):
@@ -184,6 +187,13 @@ class HexBoard:
         result = False  # Call Winning Check algorithm here
         return result
 
+    def send(self):
+        pass # todo send current move to ai algorithm
+
+    def ai_listener(self):
+        pass # todo receive results from ai algorithm
+
+
     def update(self): # used to update the broad
         if not self.changed:
             return
@@ -199,9 +209,9 @@ class HexBoard:
         # matrix = self.toMatrix()
 
         if self.winningCheck():
-            global frame
+            global run
             print("Player:", self.current_player.name, "Won!!")
-            frame = 0
+            run = False
         self.update_chess(self.current_move[0], self.current_move[1])
         self.flip()
 
