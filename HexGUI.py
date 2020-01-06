@@ -35,7 +35,6 @@ class ChessType(Enum):
 class Chess:
     y_offset = 5
     x_offset = 10
-    start_offset = 0
 
     def __init__(self, row, col, type = ChessType.EMPTY):
         self.type = type
@@ -120,7 +119,14 @@ class HexBoard:
 
     def draw_board(self, Surface):
 
-        self.chess_matrix[0][0].draw(Surface, 0, 0)
+        for row in range(self.game_dim):
+            row_offset = row * (chess_size[0] + Chess.x_offset)
+            col_offset = row * (chess_size[1] + Chess.y_offset)
+            for col in range(self.game_dim):
+                x = row_offset
+                y = col_offset + col * (chess_size[1] + Chess.y_offset)
+                self.chess_matrix[row][col].draw(Surface, x, y)
+
 
         # border
         # for chess in self.chess_matrix:
